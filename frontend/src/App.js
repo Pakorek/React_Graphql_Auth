@@ -1,12 +1,10 @@
 import React from "react";
 import "./App.css";
-import { AuthGate } from "./AuthGate";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { useAppApolloClient } from "./config/apolloClient";
+import { AuthGate } from "./AuthGate";
 
 function App() {
-
-
   const apolloClient = useAppApolloClient();
 
   return (

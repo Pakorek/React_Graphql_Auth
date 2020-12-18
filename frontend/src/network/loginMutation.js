@@ -2,10 +2,22 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { useAuthToken } from "../config/auth";
 
+/*
 export const loginMutationGQL = gql`
-  mutation login($login: String!, $password: String!) {
-    login(input: { identifier: $login, password: $password }) {
-      jwt
+  mutation auth{
+    authenticate(password: $password, email: $login) {
+      token
+    }
+  }
+`;
+*/
+export const loginMutationGQL = gql`
+  mutation auth{authenticate
+  (password: "mdp", email: "test2@mail.com") {
+      token
+      user {
+        email
+      }
     }
   }
 `;
@@ -15,7 +27,9 @@ export const useLoginMutation = () => {
 
   const [mutation, mutationResults] = useMutation(loginMutationGQL, {
     onCompleted: (data) => {
-      setAuthToken(data.login.jwt);
+      // eslint-disable-next-line no-console
+      console.log(data.authenticate.token);
+      setAuthToken(data.authenticate.token);
     },
   });
 
@@ -28,6 +42,7 @@ export const useLoginMutation = () => {
         password,
       },
     });
-  }
-  return [login, mutationResults]
+  };
+
+  return [login, mutationResults];
 };

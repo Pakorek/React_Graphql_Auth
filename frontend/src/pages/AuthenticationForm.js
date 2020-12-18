@@ -14,7 +14,7 @@ const AuthenticationForm = ({ loading }) => {
     <div style={{ margin: "auto", padding: "100px" }}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <input name="username" ref={register()} />
+          <input name="email" ref={register()} />
         </div>
         <div>
           <input name="password" type="password" ref={register()} />
