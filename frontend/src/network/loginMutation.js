@@ -29,7 +29,7 @@ export const loginMutationGQL = gql`
 
 export const useLoginMutation = () => {
   const [, setAuthToken, removeAuthtoken] = useAuthToken();
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [, setCookie] = useCookies(["user"]);
 
   const [mutation, mutationResults] = useMutation(loginMutationGQL, {
     onCompleted: (data) => {
