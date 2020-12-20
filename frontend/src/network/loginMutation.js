@@ -3,18 +3,9 @@ import { useMutation } from "@apollo/react-hooks";
 import { useCookies } from "react-cookie";
 import { useAuthToken } from "../config/auth";
 
-/*
 export const loginMutationGQL = gql`
-  mutation auth{
+  mutation auth($password: String!, $login: String!) {
     authenticate(password: $password, email: $login) {
-      token
-    }
-  }
-`;
-*/
-export const loginMutationGQL = gql`
-  mutation auth{authenticate
-  (password: "mdp", email: "test2@mail.com") {
       token
       user {
         email
@@ -23,15 +14,26 @@ export const loginMutationGQL = gql`
   }
 `;
 
+/*
+export const loginMutationGQL = gql`
+  mutation auth {
+    authenticate(password: "mdp", email: "test2@mail.com") {
+      token
+      user {
+        email
+      }
+    }
+  }
+`;
+*/
+
 export const useLoginMutation = () => {
-  const [_, setAuthToken, removeAuthtoken] = useAuthToken();
-  const [cookies, setCookie, removeCookie] = useCookies(["USER"]);
+  const [, setAuthToken, removeAuthtoken] = useAuthToken();
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   const [mutation, mutationResults] = useMutation(loginMutationGQL, {
     onCompleted: (data) => {
-      // eslint-disable-next-line no-console
-      console.log("on completed", data.authenticate.user.email)
-      // console.log(data.authenticate.token);
+      // console.log(data.authenticate.user.email);
       setCookie("user", data.authenticate.user.email);
       setAuthToken(data.authenticate.token);
     },
@@ -42,8 +44,8 @@ export const useLoginMutation = () => {
     removeAuthtoken();
     return mutation({
       variables: {
-        login: user,
         password,
+        login: user,
       },
     });
   };

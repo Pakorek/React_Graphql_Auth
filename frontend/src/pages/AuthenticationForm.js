@@ -8,16 +8,16 @@ const AuthenticationForm = ({ loading }) => {
 
   const disableForm = loginMutationResults.loading || loading;
 
-  const onSubmit = (values) => loginMutation(values.username, values.password);
+  const onSubmit = (values) => loginMutation(values.email, values.password);
 
   return (
     <div style={{ margin: "auto", padding: "100px" }}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <input name="email" ref={register()} />
+          <input name="email" ref={register()} placeholder="email" />
         </div>
         <div>
-          <input name="password" type="password" ref={register()} />
+          <input name="password" type="password" ref={register()} placeholder="******"/>
         </div>
         <button type="submit" disabled={disableForm}>
           Submit

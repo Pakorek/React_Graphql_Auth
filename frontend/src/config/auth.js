@@ -1,6 +1,4 @@
 import { useApolloClient } from "@apollo/react-hooks";
-
-
 import { useCookies } from "react-cookie";
 
 const TOKEN_NAME = "authToken";

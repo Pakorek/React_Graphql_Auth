@@ -8,7 +8,9 @@ const Private = ({ user }) => {
     <div style={{ margin: "auto", padding: "100px" }}>
       <h4>Congratulations, you are authentified !</h4>
       <pre style={{ backgroundColor: "#eee" }}>
-        {JSON.stringify(user, null, 2)}
+        {user.user}
+        <br />
+        {user.authToken}
       </pre>
       <div>
         <button onClick={logout}>Logout</button>
